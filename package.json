@@ -1,0 +1,13 @@
+{
+  "name": "stock-control",
+  "private": true,
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "dev:backend": "npm run dev -w @stock/backend",
+    "dev:frontend": "npm run dev -w @stock/frontend",
+    "test:backend": "npm run test -w @stock/backend",
+    "test:frontend": "npm run test -w @stock/frontend",
+    "test": "npm run test:backend && npm run test:frontend",
+    "build": "npm run build -w @stock/backend && npm run build -w @stock/frontend"
+  }
+}
