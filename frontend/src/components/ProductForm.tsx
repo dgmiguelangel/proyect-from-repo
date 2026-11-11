@@ -3,13 +3,14 @@ import type { Product } from "../services/api";
 
 type Input = Omit<Product, "id" | "quantityAvailable">;
 const empty: Input = { code: "", name: "", description: "", price: 0, minimumStock: 0 };
+const initialForm = (product?: Product): Input => product
+  ? { code: product.code, name: product.name, description: product.description, price: product.price, minimumStock: product.minimumStock }
+  : empty;
 
-export function ProductForm({ product, onSubmit }: { product?: Product; onSubmit: (input: Input) => Promise<void> }) {
-  const [form, setForm] = useState<Input>(product ? { code: product.code, name: product.name, description: product.description, price: product.price, minimumStock: product.minimumStock } : empty);
+export function ProductForm({ product, onSubmit, onCancel }: { product?: Product; onSubmit: (input: Input) => Promise<void>; onCancel?: () => void }) {
+  const [form, setForm] = useState<Input>(initialForm(product));
   useEffect(() => {
-    setForm(product
-      ? { code: product.code, name: product.name, description: product.description, price: product.price, minimumStock: product.minimumStock }
-      : empty);
+    setForm(initialForm(product));
   }, [product]);
   const change = (key: keyof Input, value: string) => setForm((current) => ({ ...current, [key]: key === "price" || key === "minimumStock" ? Number(value) : value }));
   return <form className="form-grid" onSubmit={(event) => { event.preventDefault(); void onSubmit(form); }}>
@@ -20,7 +21,8 @@ export function ProductForm({ product, onSubmit }: { product?: Product; onSubmit
     <label className="field">Stock mínimo<input className="text-input" type="number" min="0" value={form.minimumStock} onChange={(event) => change("minimumStock", event.target.value)} /></label>
     <div className="flex w-fit gap-2">
       <button className="primary-button" type="submit">{product ? "Guardar" : "Crear"}</button>
-      {!product && <button className="secondary-button" type="button" onClick={() => setForm(empty)}>Limpiar</button>}
+      <button className="secondary-button" type="button" onClick={() => setForm(initialForm(product))}>Limpiar</button>
+      {product && <button className="secondary-button" type="button" onClick={onCancel}>Cancelar</button>}
     </div>
   </form>;
 }

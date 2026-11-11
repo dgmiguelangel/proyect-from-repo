@@ -41,7 +41,7 @@ export function CatalogPage() {
         <button className="primary-button" type="submit">Buscar producto</button>
         <button className="secondary-button" type="button" onClick={() => void load()}>Mostrar catálogo</button>
       </form>
-      <ProductForm product={editing} onSubmit={save} />
+      <ProductForm product={editing} onSubmit={save} onCancel={() => setEditing(undefined)} />
       <ProductTable products={products} onEdit={setEditing} onDelete={(product) => void remove(product)} />
     </section>
   );
