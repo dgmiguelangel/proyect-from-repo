@@ -245,3 +245,10 @@ Tras implementar el servicio y las rutas, T020 y T021 pueden ejecutarse en paral
 2. Añadir US3 para la alerta de reposición.
 3. Incorporar Tailwind CSS para estilizar las tres historias sin alterar su comportamiento.
 4. Ejecutar la validación transversal antes de cerrar la feature.
+
+## Phase 8: Convergence
+
+- [X] T063 Add catalog product-code lookup and its not-found feedback in `frontend/src/pages/CatalogPage.tsx` per US1/AC3 and FR-003 (partial)
+- [X] T064 Add red-green frontend tests for creating, editing, deleting, and displaying catalog errors in `frontend/tests/catalog-page.test.tsx` per T014 and Constitution III (partial)
+- [X] T065 Add red-green frontend tests for product lookup, entries, exits, history, and insufficient-stock feedback in `frontend/tests/movements-page.test.tsx` per T025 and Constitution III (partial)
+- [X] T066 Add red-green frontend tests for populated and empty low-stock states in `frontend/tests/low-stock-page.test.tsx` per T034 and Constitution III (partial)

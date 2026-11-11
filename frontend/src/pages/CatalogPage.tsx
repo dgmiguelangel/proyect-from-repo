@@ -7,6 +7,7 @@ export function CatalogPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editing, setEditing] = useState<Product>();
   const [message, setMessage] = useState("");
+  const [searchCode, setSearchCode] = useState("");
   const load = () => api.products().then(setProducts).catch((error: ClientError) => setMessage(error.message));
   useEffect(() => { void load(); }, []);
   const save = async (input: Omit<Product, "id" | "quantityAvailable">) => {
@@ -17,6 +18,15 @@ export function CatalogPage() {
     if (!window.confirm(`¿Eliminar ${product.code}?`)) return;
     try { await api.deleteProduct(product.code); await load(); } catch (error) { setMessage((error as ClientError).message); }
   };
+  const search = async () => {
+    try {
+      const product = await api.product(searchCode);
+      setProducts([product]);
+      setMessage("");
+    } catch (error) {
+      setMessage((error as ClientError).message);
+    }
+  };
   return (
     <section className="page-card space-y-6">
       <div>
@@ -24,6 +34,13 @@ export function CatalogPage() {
         <p className="mt-1 text-slate-600">Administra los productos disponibles.</p>
       </div>
       {message && <p className="alert" role="alert">{message}</p>}
+      <form className="flex flex-col gap-3 sm:flex-row sm:items-end" onSubmit={(event) => { event.preventDefault(); void search(); }}>
+        <label className="field flex-1">Buscar por código
+          <input className="text-input" value={searchCode} onChange={(event) => setSearchCode(event.target.value)} />
+        </label>
+        <button className="primary-button" type="submit">Buscar producto</button>
+        <button className="secondary-button" type="button" onClick={() => void load()}>Mostrar catálogo</button>
+      </form>
       <ProductForm product={editing} onSubmit={save} />
       <ProductTable products={products} onEdit={setEditing} onDelete={(product) => void remove(product)} />
     </section>
