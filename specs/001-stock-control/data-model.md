@@ -42,7 +42,6 @@ No se persiste ni se envía al servidor al seleccionar “Limpiar” o “Cancel
 | Acción | Estado resultante |
 |---|---|
 | Limpiar en alta | Código, nombre y descripción vacíos; precio y stock mínimo en `0`. |
-| Limpiar en edición | Nombre, descripción, precio y stock mínimo vuelven a los valores guardados del producto; el código permanece no editable. |
 | Cancelar en edición | Se descartan los cambios locales, no queda un producto seleccionado y se muestra el formulario de alta vacío. |
 
 ## Administrador

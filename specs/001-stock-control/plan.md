@@ -11,8 +11,8 @@ inmutable de entradas y salidas. Se implementa como monorepo npm con API Express
 SQLite y una interfaz React/Vite estilizada con Tailwind CSS; la API aplica reglas de inventario
 dentro de transacciones y la interfaz consume un contrato HTTP estable.
 Los formularios de alta y edición ofrecen acciones locales que no realizan solicitudes a la API
-ni modifican el catálogo: alta vuelve a sus valores iniciales, edición recupera los valores
-guardados del producto y cancelar abandona la edición para mostrar el formulario de alta vacío.
+ni modifican el catálogo: alta vuelve a sus valores iniciales y cancelar abandona la edición para
+mostrar el formulario de alta vacío.
 
 ## Technical Context
 
@@ -35,9 +35,9 @@ mayor.
 
 **Constraints**: Un administrador, una instancia local, sin acceso concurrente, sin ORM ni
 routing frontend; las operaciones de movimiento son atómicas y el stock nunca es negativo. El
-restablecimiento de edición es únicamente local y debe recuperar los valores persistidos del
-producto sin enviar solicitudes. Cancelar edición debe descartar el estado local y deseleccionar
-el producto sin enviar solicitudes.
+botón Limpiar solo está disponible durante el alta y debe restablecer valores iniciales sin
+enviar solicitudes. Cancelar edición debe descartar el estado local y deseleccionar el producto
+sin enviar solicitudes.
 
 **Scale/Scope**: Catálogo, movimientos e identificación de stock bajo para un comercio; se
 excluyen facturación, compras, ventas, terceros, pagos y múltiples depósitos.

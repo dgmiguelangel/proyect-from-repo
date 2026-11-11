@@ -36,9 +36,7 @@ CSS desde la hoja global, sin errores de compilación de Vite.
 6. Intentar eliminar un producto con movimientos; comprobar que la API informa el conflicto.
 7. Mientras se crea un producto, completar todos los campos y seleccionar “Limpiar”; comprobar
    que los textos quedan vacíos, los valores numéricos vuelven a cero y el catálogo no cambia.
-8. Seleccionar “Editar” sobre un producto, cambiar nombre, descripción, precio y stock mínimo,
-   y seleccionar “Limpiar”; comprobar que los campos recuperan los valores guardados y que no
-   se realiza ninguna actualización del catálogo.
+8. Seleccionar “Editar” sobre un producto y comprobar que el botón “Limpiar” no se muestra.
 9. Mientras se edita un producto, cambiar campos y seleccionar “Cancelar”; comprobar que se
    muestra el formulario de alta vacío y que no se realiza ninguna actualización del catálogo.
 

@@ -21,7 +21,7 @@ export function ProductForm({ product, onSubmit, onCancel }: { product?: Product
     <label className="field">Stock mínimo<input className="text-input" type="number" min="0" value={form.minimumStock} onChange={(event) => change("minimumStock", event.target.value)} /></label>
     <div className="flex w-fit gap-2">
       <button className="primary-button" type="submit">{product ? "Guardar" : "Crear"}</button>
-      <button className="secondary-button" type="button" onClick={() => setForm(initialForm(product))}>Limpiar</button>
+      {!product && <button className="secondary-button" type="button" onClick={() => setForm(empty)}>Limpiar</button>}
       {product && <button className="secondary-button" type="button" onClick={onCancel}>Cancelar</button>}
     </div>
   </form>;

@@ -27,6 +27,10 @@ export function CatalogPage() {
       setMessage((error as ClientError).message);
     }
   };
+  const showCatalog = () => {
+    setSearchCode("");
+    void load();
+  };
   return (
     <section className="page-card space-y-6">
       <div>
@@ -39,7 +43,7 @@ export function CatalogPage() {
           <input className="text-input" value={searchCode} onChange={(event) => setSearchCode(event.target.value)} />
         </label>
         <button className="primary-button" type="submit">Buscar producto</button>
-        <button className="secondary-button" type="button" onClick={() => void load()}>Mostrar catálogo</button>
+        <button className="secondary-button" type="button" onClick={showCatalog}>Mostrar catálogo</button>
       </form>
       <ProductForm product={editing} onSubmit={save} onCancel={() => setEditing(undefined)} />
       <ProductTable products={products} onEdit={setEditing} onDelete={(product) => void remove(product)} />

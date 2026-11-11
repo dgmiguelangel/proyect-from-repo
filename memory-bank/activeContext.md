@@ -18,7 +18,15 @@
   backend (8), frontend (11) y la compilación finalizaron correctamente.
 
 ## Próxima tarea
-Revisar y versionar los cambios de documentación e implementación.
+Revisar y versionar los cambios de documentación e implementación. El backlog unificado
+`specs/001-stock-control/tasks.md` fue regenerado desde la especificación, el plan y los
+contratos. La implementación fue contrastada nuevamente con dicho backlog: 8 pruebas backend,
+11 frontend y la compilación de producción finalizaron correctamente el 2026-11-11.
+- La especificación aclara que «Limpiar» se oculta durante la edición; esta decisión reemplaza
+  la aclaración previa incompatible que indicaba restablecer valores desde ese botón.
+- T046–T047 están completadas: Limpiar se oculta en edición, Mostrar catálogo vacía la búsqueda
+  y los artefactos de diseño quedaron alineados. Las suites backend (8), frontend (12) y la
+  compilación finalizaron correctamente.
 
 ## Observaciones
 Mantener la implementación dentro del alcance de la especificación y la constitución.

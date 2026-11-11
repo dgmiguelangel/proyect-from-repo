@@ -48,6 +48,19 @@ describe("catálogo", () => {
     expect(await screen.findByText(product.name)).toBeInTheDocument();
   });
 
+  it("muestra el catálogo completo y vacía la búsqueda", async () => {
+    mockedApi.products.mockResolvedValue([product]);
+    render(<CatalogPage />);
+
+    const searchInput = await screen.findByLabelText("Buscar por código");
+    fireEvent.change(searchInput, { target: { value: product.code } });
+    fireEvent.click(screen.getByRole("button", { name: "Mostrar catálogo" }));
+
+    await waitFor(() => expect(mockedApi.products).toHaveBeenCalledTimes(2));
+    expect(searchInput).toHaveValue("");
+    expect(await screen.findByText(product.name)).toBeInTheDocument();
+  });
+
   it("crea productos mediante la API", async () => {
     mockedApi.createProduct.mockResolvedValue(product);
     render(<CatalogPage />);
@@ -84,24 +97,13 @@ describe("catálogo", () => {
     expect(mockedApi.deleteProduct).not.toHaveBeenCalled();
   });
 
-  it("restaura los valores guardados al limpiar el formulario de edición", async () => {
+  it("oculta Limpiar durante la edición", async () => {
     mockedApi.products.mockResolvedValue([product]);
     render(<CatalogPage />);
 
     fireEvent.click(await screen.findByRole("button", { name: "Editar" }));
-    fireEvent.change(screen.getByLabelText("Nombre"), { target: { value: "Té" } });
-    fireEvent.change(screen.getByLabelText("Descripción"), { target: { value: "En hebras" } });
-    fireEvent.change(screen.getByLabelText("Precio"), { target: { value: "20" } });
-    fireEvent.change(screen.getByLabelText("Stock mínimo"), { target: { value: "5" } });
-    fireEvent.click(screen.getByRole("button", { name: "Limpiar" }));
 
-    expect(screen.getByLabelText("Nombre")).toHaveValue(product.name);
-    expect(screen.getByLabelText("Descripción")).toHaveValue(product.description);
-    expect(screen.getByLabelText("Precio")).toHaveValue(product.price);
-    expect(screen.getByLabelText("Stock mínimo")).toHaveValue(product.minimumStock);
-    expect(mockedApi.createProduct).not.toHaveBeenCalled();
-    expect(mockedApi.updateProduct).not.toHaveBeenCalled();
-    expect(mockedApi.deleteProduct).not.toHaveBeenCalled();
+    expect(screen.queryByRole("button", { name: "Limpiar" })).not.toBeInTheDocument();
   });
 
   it("cancela la edición y muestra el formulario de creación vacío", async () => {

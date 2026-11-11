@@ -17,6 +17,14 @@
   creación vacío sin modificar el catálogo.
 - [x] Generar las tareas T074–T078 para cancelar la edición localmente.
 - [x] Implementar y validar las tareas T074–T078 de cancelación local de la edición.
+- [x] Regenerar el backlog ejecutable unificado para `001-stock-control` con pruebas por
+  historia, dependencias y oportunidades de paralelismo.
+- [x] Verificar las tareas T001–T045 contra la implementación actual; `npm run test:backend`,
+  `npm run test:frontend` y `npm run build` finalizaron correctamente.
+- [x] Aclarar FR-014: «Limpiar» se oculta durante la edición y la especificación ya no contiene
+  la alternativa contradictoria.
+- [x] Implementar T046–T047: ocultar Limpiar durante la edición, vaciar la búsqueda al mostrar
+  el catálogo y alinear los artefactos de diseño; pruebas y compilación correctas.
 
 ## Pendiente
 - [ ] Revisar y versionar los cambios de implementación.
