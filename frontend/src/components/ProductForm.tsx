@@ -18,6 +18,9 @@ export function ProductForm({ product, onSubmit }: { product?: Product; onSubmit
     <label className="field sm:col-span-2">Descripción<input className="text-input" value={form.description} onChange={(event) => change("description", event.target.value)} /></label>
     <label className="field">Precio<input className="text-input" type="number" min="0" value={form.price} onChange={(event) => change("price", event.target.value)} /></label>
     <label className="field">Stock mínimo<input className="text-input" type="number" min="0" value={form.minimumStock} onChange={(event) => change("minimumStock", event.target.value)} /></label>
-    <button className="primary-button w-fit" type="submit">{product ? "Guardar" : "Crear"}</button>
+    <div className="flex w-fit gap-2">
+      <button className="primary-button" type="submit">{product ? "Guardar" : "Crear"}</button>
+      {!product && <button className="secondary-button" type="button" onClick={() => setForm(empty)}>Limpiar</button>}
+    </div>
   </form>;
 }

@@ -49,3 +49,13 @@
 - **Alternativas consideradas**: CSS manual por componente o una librería de UI. El primero no
   cumple la decisión de usar Tailwind y el segundo introduce dependencias y patrones de diseño
   no requeridos.
+
+### Restablecimiento del formulario de producto
+
+- **Decisión**: Incluir un botón de limpieza solo durante el alta que restablezca el estado local
+  del formulario a texto vacío y valores numéricos en cero.
+- **Justificación**: Permite corregir una carga incompleta sin crear, modificar ni eliminar
+  productos, tal como exige el escenario de aceptación.
+- **Alternativas consideradas**: Recargar la página o reutilizar el botón para cancelar una
+  edición. La recarga pierde el contexto del catálogo y cancelar edición no forma parte del
+  alcance solicitado.

@@ -252,3 +252,14 @@ Tras implementar el servicio y las rutas, T020 y T021 pueden ejecutarse en paral
 - [X] T064 Add red-green frontend tests for creating, editing, deleting, and displaying catalog errors in `frontend/tests/catalog-page.test.tsx` per T014 and Constitution III (partial)
 - [X] T065 Add red-green frontend tests for product lookup, entries, exits, history, and insufficient-stock feedback in `frontend/tests/movements-page.test.tsx` per T025 and Constitution III (partial)
 - [X] T066 Add red-green frontend tests for populated and empty low-stock states in `frontend/tests/low-stock-page.test.tsx` per T034 and Constitution III (partial)
+
+## Phase 9: User Story 1 - Limpiar formulario de creación (Priority: P1)
+
+**Goal**: Permitir al administrador descartar una carga de producto sin modificar el catálogo.
+
+**Independent Test**: Tras completar el formulario de alta, “Limpiar” vacía código, nombre y
+descripción, devuelve precio y stock mínimo a cero, y no llama a la API.
+
+- [X] T067 [US1] Escribir en rojo la prueba del restablecimiento local y la ausencia de llamadas a la API en `frontend/tests/catalog-page.test.tsx`
+- [X] T068 [US1] Implementar el botón “Limpiar” solo en modo creación y restablecer el estado inicial en `frontend/src/components/ProductForm.tsx`
+- [X] T069 [US1] Ejecutar y verificar la prueba del formulario de creación en `frontend/tests/catalog-page.test.tsx`

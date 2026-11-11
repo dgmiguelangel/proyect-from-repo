@@ -34,6 +34,8 @@ CSS desde la hoja global, sin errores de compilación de Vite.
 5. Consultar stock bajo; comprobar que lista exactamente los productos definidos en la vista
    derivada de [data-model.md](./data-model.md).
 6. Intentar eliminar un producto con movimientos; comprobar que la API informa el conflicto.
+7. Mientras se crea un producto, completar todos los campos y seleccionar “Limpiar”; comprobar
+   que los textos quedan vacíos, los valores numéricos vuelven a cero y el catálogo no cambia.
 
 Las rutas, formatos de solicitudes y códigos de error se definen en
 [contracts/openapi.yaml](./contracts/openapi.yaml).

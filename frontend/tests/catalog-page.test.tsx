@@ -64,6 +64,26 @@ describe("catálogo", () => {
     })));
   });
 
+  it("limpia el formulario de creación sin modificar el catálogo", async () => {
+    render(<CatalogPage />);
+
+    fireEvent.change(await screen.findByLabelText("Código"), { target: { value: product.code } });
+    fireEvent.change(screen.getByLabelText("Nombre"), { target: { value: product.name } });
+    fireEvent.change(screen.getByLabelText("Descripción"), { target: { value: product.description } });
+    fireEvent.change(screen.getByLabelText("Precio"), { target: { value: "12.5" } });
+    fireEvent.change(screen.getByLabelText("Stock mínimo"), { target: { value: "2" } });
+    fireEvent.click(screen.getByRole("button", { name: "Limpiar" }));
+
+    expect(screen.getByLabelText("Código")).toHaveValue("");
+    expect(screen.getByLabelText("Nombre")).toHaveValue("");
+    expect(screen.getByLabelText("Descripción")).toHaveValue("");
+    expect(screen.getByLabelText("Precio")).toHaveValue(0);
+    expect(screen.getByLabelText("Stock mínimo")).toHaveValue(0);
+    expect(mockedApi.createProduct).not.toHaveBeenCalled();
+    expect(mockedApi.updateProduct).not.toHaveBeenCalled();
+    expect(mockedApi.deleteProduct).not.toHaveBeenCalled();
+  });
+
   it("edita y elimina productos mediante la API", async () => {
     mockedApi.updateProduct.mockResolvedValue(product);
     mockedApi.deleteProduct.mockResolvedValue(undefined);

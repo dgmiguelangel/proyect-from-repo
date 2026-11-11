@@ -8,6 +8,12 @@
 
 **Input**: User description: "Analizar la base de código construida y redactar el spec.md con el comportamiento actual: aplicación de control de stock para un único administrador que permite registrar, consultar, modificar y eliminar productos (código único, nombre, descripción, precio, cantidad disponible y stock mínimo), registrar entradas y salidas de mercadería con actualización automática de existencias, impedir stock negativo y mostrar los productos con stock bajo."
 
+## Clarifications
+
+### Session 2026-11-11
+
+- Q: ¿Qué debe hacer el botón de limpiar del formulario de creación? → A: Restablecer los campos iniciales sin modificar el catálogo.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Gestionar catálogo de productos (Priority: P1)
@@ -40,6 +46,9 @@ datos y eliminarlo si no tiene movimientos, obteniendo un catálogo actualizado.
 6. **Given** que un producto ya tiene movimientos registrados, **When** el administrador intenta
    eliminarlo, **Then** el sistema rechaza la operación e informa que no se puede eliminar un
    producto con movimientos.
+7. **Given** que el administrador está creando un producto, **When** selecciona el botón para
+   limpiar el formulario, **Then** código, nombre y descripción quedan vacíos, precio y stock
+   mínimo vuelven a cero, y el catálogo no se modifica.
 
 ---
 
@@ -149,6 +158,8 @@ mínimo.
 - **FR-012**: El sistema DEBE limitar las acciones de esta versión al control de productos y
   existencias para un único administrador; no incluye facturación, compras, ventas,
   proveedores, clientes, pagos ni múltiples depósitos.
+- **FR-013**: El sistema DEBE ofrecer, durante la creación de un producto, un botón para
+  restablecer el formulario a sus valores iniciales sin crear, modificar ni eliminar productos.
 
 ### Key Entities *(include if feature involves data)*
 

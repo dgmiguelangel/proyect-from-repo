@@ -10,6 +10,8 @@ Aplicación web local para administrar productos y sus existencias mediante un l
 inmutable de entradas y salidas. Se implementa como monorepo npm con API Express/TypeScript,
 SQLite y una interfaz React/Vite estilizada con Tailwind CSS; la API aplica reglas de inventario
 dentro de transacciones y la interfaz consume un contrato HTTP estable.
+El formulario de alta ofrece un restablecimiento local que no realiza solicitudes a la API ni
+modifica el catálogo.
 
 ## Technical Context
 
