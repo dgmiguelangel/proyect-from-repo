@@ -1,9 +1,13 @@
-# Contexto activo
+# Contexto actual
 
-La feature `001-stock-control` implementa un monorepo npm con API Express/SQLite y UI React.
-Las validaciones y movimientos se han verificado con las pruebas automatizadas definidas en la
-feature. Tailwind CSS 3 está configurado en el frontend con PostCSS y estilos compartidos para
-la navegación, formularios, tablas, alertas y estados vacíos. El catálogo permite buscar por
-código y muestra su descripción; las pruebas frontend cubren los flujos principales.
-El formulario de creación incluye “Limpiar”, que restablece sus valores sin solicitar cambios
-al catálogo.
+## Estado del proyecto
+- La implementación de `001-stock-control` está completa: workspace TypeScript, API Express, SQLite, UI React/Tailwind y pruebas.
+- Las 40 tareas de `specs/001-stock-control/tasks.md` (T001–T040) están verificadas y marcadas como completadas.
+- La API protege los invariantes: código único, stock inicial cero, movimientos atómicos, stock nunca negativo y productos con movimientos no eliminables.
+- Validación ejecutada correctamente: `npm run test:backend`, `npm run test:frontend` y `npm run build`.
+
+## Próxima tarea
+Revisar los cambios y, si corresponde, preparar el commit de la implementación.
+
+## Observaciones
+Mantener la implementación dentro del alcance de la especificación y la constitución.

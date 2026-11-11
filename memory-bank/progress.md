@@ -1,6 +1,13 @@
-# Progreso
+# Progreso del proyecto
 
-La implementación de `001-stock-control` y la incorporación de Tailwind CSS están completas.
-La convergencia agregó búsqueda de catálogo y pruebas de flujos frontend. Se ejecutaron
-correctamente las pruebas de backend, frontend y la compilación de los workspaces. El botón
-“Limpiar” del formulario de creación también está implementado y cubierto por pruebas.
+## Completado
+- [x] Crear constitución.
+- [x] Crear especificación funcional.
+- [x] Crear plan técnico.
+- [x] Generar tareas (T001–T040 en `specs/001-stock-control/tasks.md`).
+- [x] Implementar backend y frontend de control de stock (T001–T037).
+- [x] Validar escenarios y actualizar el quickstart (T038–T040).
+- [x] Ejecutar `npm run test:backend`, `npm run test:frontend` y `npm run build`.
+
+## Pendiente
+- [ ] Revisar y versionar los cambios de implementación.
