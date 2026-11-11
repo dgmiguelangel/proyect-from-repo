@@ -17,5 +17,15 @@ export function CatalogPage() {
     if (!window.confirm(`¿Eliminar ${product.code}?`)) return;
     try { await api.deleteProduct(product.code); await load(); } catch (error) { setMessage((error as ClientError).message); }
   };
-  return <section><h1>Catálogo</h1>{message && <p role="alert">{message}</p>}<ProductForm product={editing} onSubmit={save} /><ProductTable products={products} onEdit={setEditing} onDelete={(product) => void remove(product)} /></section>;
+  return (
+    <section className="page-card space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Catálogo</h1>
+        <p className="mt-1 text-slate-600">Administra los productos disponibles.</p>
+      </div>
+      {message && <p className="alert" role="alert">{message}</p>}
+      <ProductForm product={editing} onSubmit={save} />
+      <ProductTable products={products} onEdit={setEditing} onDelete={(product) => void remove(product)} />
+    </section>
+  );
 }

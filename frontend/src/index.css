@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen bg-slate-100 text-slate-900;
+  }
+
+  button,
+  input,
+  select {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 lg:px-8;
+  }
+
+  .page-card {
+    @apply rounded-xl bg-white p-5 shadow-sm sm:p-8;
+  }
+
+  .nav-link {
+    @apply rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200;
+  }
+
+  .nav-link-active {
+    @apply bg-sky-600 text-white hover:bg-sky-700;
+  }
+
+  .form-grid {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+
+  .field {
+    @apply flex flex-col gap-1 text-sm font-medium text-slate-700;
+  }
+
+  .text-input {
+    @apply rounded-lg border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm disabled:cursor-not-allowed disabled:bg-slate-100;
+  }
+
+  .primary-button {
+    @apply rounded-lg bg-sky-600 px-4 py-2 font-semibold text-white transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:bg-slate-400;
+  }
+
+  .secondary-button {
+    @apply rounded-lg bg-slate-200 px-3 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-300;
+  }
+
+  .danger-button {
+    @apply rounded-lg bg-rose-600 px-3 py-2 text-sm font-semibold text-white transition hover:bg-rose-700;
+  }
+
+  .alert {
+    @apply rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800;
+  }
+
+  .table-wrapper {
+    @apply overflow-x-auto rounded-lg border border-slate-200;
+  }
+
+  .data-table {
+    @apply min-w-full divide-y divide-slate-200 text-left text-sm;
+  }
+
+  .data-table thead {
+    @apply bg-slate-50 text-xs uppercase tracking-wide text-slate-500;
+  }
+
+  .data-table th,
+  .data-table td {
+    @apply whitespace-nowrap px-4 py-3;
+  }
+
+  .data-table tbody {
+    @apply divide-y divide-slate-100 bg-white text-slate-700;
+  }
+
+  .empty-state {
+    @apply rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center text-slate-600;
+  }
+}

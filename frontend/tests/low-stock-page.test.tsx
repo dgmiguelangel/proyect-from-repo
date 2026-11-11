@@ -5,6 +5,6 @@ import App from "../src/App";
 describe("stock bajo", () => {
   it("permite navegar a stock bajo", () => {
     render(<App />);
-    expect(screen.getByRole("button", { name: "Stock bajo" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Stock bajo" })).toHaveClass("nav-link");
   });
 });

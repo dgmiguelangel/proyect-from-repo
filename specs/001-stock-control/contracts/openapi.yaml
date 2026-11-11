@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: API de Control de Stock
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      summary: Lista el catálogo ordenado por código
+      responses:
+        '200':
+          description: Catálogo
+    post:
+      summary: Crea un producto con saldo inicial cero
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Producto creado
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/DuplicateCode'
+  /products/{code}:
+    parameters:
+      - $ref: '#/components/parameters/ProductCode'
+    get:
+      summary: Obtiene un producto
+      responses:
+        '200':
+          description: Producto
+        '404':
+          $ref: '#/components/responses/ProductNotFound'
+    patch:
+      summary: Actualiza nombre, descripción, precio o stock mínimo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              minProperties: 1
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                price:
+                  type: number
+                  minimum: 0
+                minimumStock:
+                  type: integer
+                  minimum: 0
+      responses:
+        '200':
+          description: Producto actualizado
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/ProductNotFound'
+    delete:
+      summary: Elimina un producto sin movimientos
+      responses:
+        '204':
+          description: Producto eliminado
+        '404':
+          $ref: '#/components/responses/ProductNotFound'
+        '409':
+          $ref: '#/components/responses/ProductHasMovements'
+  /products/{code}/movements:
+    parameters:
+      - $ref: '#/components/parameters/ProductCode'
+    get:
+      summary: Lista el historial cronológico del producto
+      responses:
+        '200':
+          description: Movimientos
+        '404':
+          $ref: '#/components/responses/ProductNotFound'
+    post:
+      summary: Registra una entrada o salida de mercadería
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovementInput'
+      responses:
+        '201':
+          description: Movimiento registrado y saldo actualizado
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/ProductNotFound'
+        '409':
+          $ref: '#/components/responses/InsufficientStock'
+  /products/low-stock:
+    get:
+      summary: Lista productos con cantidad disponible menor o igual al stock mínimo
+      responses:
+        '200':
+          description: Productos con stock bajo
+components:
+  parameters:
+    ProductCode:
+      name: code
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details: {}
+    ProductInput:
+      type: object
+      required: [code, name, description, price, minimumStock]
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          minimum: 0
+        minimumStock:
+          type: integer
+          minimum: 0
+    MovementInput:
+      type: object
+      required: [type, quantity]
+      properties:
+        type:
+          type: string
+          enum: [ENTRY, EXIT]
+        quantity:
+          type: integer
+          minimum: 1
+  responses:
+    ValidationError:
+      description: Datos de entrada inválidos
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ProductNotFound:
+      description: Producto inexistente
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    DuplicateCode:
+      description: Código de producto duplicado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InsufficientStock:
+      description: Stock disponible insuficiente
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ProductHasMovements:
+      description: El producto tiene movimientos registrados
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

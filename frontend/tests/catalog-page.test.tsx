@@ -6,5 +6,7 @@ describe("catálogo", () => {
   it("muestra la página de catálogo", () => {
     render(<App />);
     expect(screen.getByRole("heading", { name: "Catálogo" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Secciones" })).toHaveClass("rounded-xl");
+    expect(screen.getByRole("button", { name: "Catálogo" })).toHaveClass("nav-link-active");
   });
 });
