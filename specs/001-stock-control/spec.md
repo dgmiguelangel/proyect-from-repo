@@ -13,6 +13,8 @@
 ### Session 2026-11-11
 
 - Q: ¿Qué debe hacer el botón de limpiar del formulario de creación? → A: Restablecer los campos iniciales sin modificar el catálogo.
+- Q: ¿Qué debe ocurrir al pulsar «Limpiar» en el formulario de edición de un producto? → A: Restaurar todos los campos editables a los valores guardados del producto.
+- Q: ¿Qué debe mostrar el formulario después de cancelar la edición de un producto? → A: Salir de edición y mostrar el formulario de creación vacío.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -40,13 +42,19 @@ datos y eliminarlo si no tiene movimientos, obteniendo un catálogo actualizado.
 4. **Given** que existe un producto, **When** el administrador modifica nombre, descripción,
    precio o stock mínimo con valores válidos, **Then** la consulta posterior muestra los nuevos
    valores. El código no se puede editar desde el formulario de modificación.
-5. **Given** que un producto no tiene movimientos registrados, **When** el administrador
+5. **Given** que el administrador está editando un producto, **When** selecciona el botón para
+   limpiar el formulario, **Then** todos los campos editables vuelven a los valores guardados
+   del producto y el catálogo no se modifica.
+6. **Given** que el administrador está editando un producto, **When** selecciona el botón para
+   cancelar la edición, **Then** se descartan sus cambios locales, se muestra el formulario de
+   creación vacío y el catálogo no se modifica.
+7. **Given** que un producto no tiene movimientos registrados, **When** el administrador
    confirma su eliminación en el diálogo de confirmación, **Then** el producto deja de aparecer
    en el catálogo.
-6. **Given** que un producto ya tiene movimientos registrados, **When** el administrador intenta
+8. **Given** que un producto ya tiene movimientos registrados, **When** el administrador intenta
    eliminarlo, **Then** el sistema rechaza la operación e informa que no se puede eliminar un
    producto con movimientos.
-7. **Given** que el administrador está creando un producto, **When** selecciona el botón para
+9. **Given** que el administrador está creando un producto, **When** selecciona el botón para
    limpiar el formulario, **Then** código, nombre y descripción quedan vacíos, precio y stock
    mínimo vuelven a cero, y el catálogo no se modifica.
 
@@ -160,6 +168,12 @@ mínimo.
   proveedores, clientes, pagos ni múltiples depósitos.
 - **FR-013**: El sistema DEBE ofrecer, durante la creación de un producto, un botón para
   restablecer el formulario a sus valores iniciales sin crear, modificar ni eliminar productos.
+- **FR-014**: El sistema DEBE ofrecer, durante la edición de un producto, un botón para
+  restablecer todos los campos editables a los valores guardados del producto sin modificar el
+  catálogo.
+- **FR-015**: El sistema DEBE ofrecer, durante la edición de un producto, un botón para
+  cancelarla, descartar cambios locales y volver al formulario de creación vacío sin modificar
+  el catálogo.
 
 ### Key Entities *(include if feature involves data)*
 

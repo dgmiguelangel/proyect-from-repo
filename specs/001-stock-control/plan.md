@@ -10,8 +10,9 @@ Aplicación web local para administrar productos y sus existencias mediante un l
 inmutable de entradas y salidas. Se implementa como monorepo npm con API Express/TypeScript,
 SQLite y una interfaz React/Vite estilizada con Tailwind CSS; la API aplica reglas de inventario
 dentro de transacciones y la interfaz consume un contrato HTTP estable.
-El formulario de alta ofrece un restablecimiento local que no realiza solicitudes a la API ni
-modifica el catálogo.
+Los formularios de alta y edición ofrecen acciones locales que no realizan solicitudes a la API
+ni modifican el catálogo: alta vuelve a sus valores iniciales, edición recupera los valores
+guardados del producto y cancelar abandona la edición para mostrar el formulario de alta vacío.
 
 ## Technical Context
 
@@ -33,7 +34,10 @@ de un minuto; en series de al menos 100 movimientos, el saldo mostrado coincide 
 mayor.
 
 **Constraints**: Un administrador, una instancia local, sin acceso concurrente, sin ORM ni
-routing frontend; las operaciones de movimiento son atómicas y el stock nunca es negativo.
+routing frontend; las operaciones de movimiento son atómicas y el stock nunca es negativo. El
+restablecimiento de edición es únicamente local y debe recuperar los valores persistidos del
+producto sin enviar solicitudes. Cancelar edición debe descartar el estado local y deseleccionar
+el producto sin enviar solicitudes.
 
 **Scale/Scope**: Catálogo, movimientos e identificación de stock bajo para un comercio; se
 excluyen facturación, compras, ventas, terceros, pagos y múltiples depósitos.
@@ -41,13 +45,13 @@ excluyen facturación, compras, ventas, terceros, pagos y múltiples depósitos.
 ## Constitution Check
 
 *Preinvestigación: APROBADO.* El diseño respeta el flujo Spec Kit, el alcance mínimo y el stack
-fijado. Las pruebas se escribirán antes de cada historia y los cambios de stock se limitarán a
-transacciones SQLite. La validación Zod en rutas y el formato de errores estable son requisitos
-del contrato.
+fijado. La prueba de cancelación de edición se escribirá antes del cambio de interfaz. No hay
+cambios de stock, persistencia ni API; las garantías existentes de transacciones SQLite,
+validación Zod y formato de errores permanecen sin cambios.
 
-*Postdiseño: APROBADO.* El modelo y contrato conservan el libro mayor append-only, restricciones
-SQL, actualización atómica de saldo y códigos de error definidos. No se requiere justificar
-complejidad adicional.
+*Postdiseño: APROBADO.* El diseño añade solo estado local de formulario y selección de edición,
+y conserva el libro mayor append-only, restricciones SQL, actualización atómica de saldo y
+códigos de error definidos. No se requiere justificar complejidad adicional.
 
 ## Project Structure
 
@@ -60,7 +64,8 @@ specs/001-stock-control/
 ├── data-model.md
 ├── quickstart.md
 └── contracts/
-    └── openapi.yaml
+    ├── openapi.yaml
+    └── product-form.md
 ```
 
 ### Source Code (repository root)

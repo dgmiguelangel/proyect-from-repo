@@ -52,10 +52,13 @@
 
 ### Restablecimiento del formulario de producto
 
-- **Decisión**: Incluir un botón de limpieza solo durante el alta que restablezca el estado local
-  del formulario a texto vacío y valores numéricos en cero.
-- **Justificación**: Permite corregir una carga incompleta sin crear, modificar ni eliminar
-  productos, tal como exige el escenario de aceptación.
-- **Alternativas consideradas**: Recargar la página o reutilizar el botón para cancelar una
-  edición. La recarga pierde el contexto del catálogo y cancelar edición no forma parte del
-  alcance solicitado.
+- **Decisión**: Mantener el restablecimiento local en ambos modos del formulario. En alta,
+  "Limpiar" vuelve a texto vacío y valores numéricos en cero; en edición, vuelve a los valores
+  guardados del producto. "Cancelar" solo está disponible durante la edición, descarta los
+  cambios locales y devuelve el formulario a modo alta vacío.
+- **Justificación**: Permite distinguir entre corregir cambios sin salir de edición y abandonar
+  una edición sin crear, actualizar ni eliminar productos.
+- **Alternativas consideradas**: Hacer que "Cancelar" solo restaure los valores, vaciar los
+  campos de edición, recargar la página o enviar una actualización para deshacer cambios. La
+  primera duplica "Limpiar"; las demás no recuperan el flujo de alta o modifican innecesariamente
+  el contexto o catálogo.

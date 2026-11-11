@@ -263,3 +263,95 @@ descripción, devuelve precio y stock mínimo a cero, y no llama a la API.
 - [X] T067 [US1] Escribir en rojo la prueba del restablecimiento local y la ausencia de llamadas a la API en `frontend/tests/catalog-page.test.tsx`
 - [X] T068 [US1] Implementar el botón “Limpiar” solo en modo creación y restablecer el estado inicial en `frontend/src/components/ProductForm.tsx`
 - [X] T069 [US1] Ejecutar y verificar la prueba del formulario de creación en `frontend/tests/catalog-page.test.tsx`
+
+---
+
+## Phase 10: User Story 1 - Restablecer formulario de edición (Priority: P1) 🎯 MVP
+
+**Goal**: Permitir al administrador descartar cambios locales durante la edición y recuperar los
+valores guardados del producto sin modificar el catálogo.
+
+**Independent Test**: Tras seleccionar “Editar”, cambiar nombre, descripción, precio y stock
+mínimo y pulsar “Limpiar”, los campos recuperan los valores del producto editado y no se llama a
+la API.
+
+### Pruebas de la historia de usuario 1
+
+> **NOTA: Escribir esta prueba primero y comprobar que falla antes de implementar.**
+
+- [X] T070 [US1] Añadir prueba React que edite un producto, cambie sus campos, pulse “Limpiar” y verifique valores guardados y ausencia de llamadas a la API en `frontend/tests/catalog-page.test.tsx`
+
+### Implementación de la historia de usuario 1
+
+- [X] T071 [US1] Mostrar “Limpiar” en modo edición y restablecer nombre, descripción, precio y stock mínimo desde el producto seleccionado en `frontend/src/components/ProductForm.tsx`
+
+### Validación de la historia de usuario 1
+
+- [X] T072 [US1] Ejecutar la prueba del restablecimiento de edición en `frontend/tests/catalog-page.test.tsx`
+
+**Checkpoint**: El restablecimiento de alta sigue intacto y el de edición recupera los valores
+guardados sin crear, actualizar ni eliminar productos.
+
+---
+
+## Phase 11: Polish & Cross-Cutting Validation
+
+- [X] T073 Ejecutar `npm run test:backend`, `npm run test:frontend` y `npm run build`, y registrar el estado verificado en `memory-bank/activeContext.md` y `memory-bank/progress.md`
+
+---
+
+## Dependencias y orden de ejecución: restablecimiento de edición
+
+- **T070 → T071 → T072 → T073**: La prueba debe fallar antes de la implementación; la validación
+  específica y las puertas de calidad se ejecutan después.
+- **Oportunidades paralelas**: Ninguna; T070 y T071 modifican archivos compartidos y deben
+  ejecutarse en el orden Red-Green-Refactor.
+
+## Estrategia de implementación incremental
+
+1. Completar T070 y confirmar el fallo.
+2. Completar T071 para restaurar el estado inicial de edición localmente.
+3. Completar T072 y T073 para validar la historia y las puertas constitucionales.
+
+---
+
+## Phase 12: User Story 1 - Cancelar edición de producto (Priority: P1) 🎯 MVP
+
+**Goal**: Permitir al administrador abandonar una edición y volver al formulario de alta vacío
+sin persistir sus cambios locales.
+
+**Independent Test**: Tras editar un producto, modificar campos y seleccionar “Cancelar”, el
+formulario muestra el modo de creación vacío y no se llama a la API.
+
+### Pruebas de la historia de usuario 1
+
+> **NOTA: Escribir esta prueba primero y comprobar que falla antes de implementar.**
+
+- [X] T074 [US1] Añadir prueba React que cancele una edición, verifique el formulario de alta vacío y la ausencia de llamadas a la API en `frontend/tests/catalog-page.test.tsx`
+
+### Implementación de la historia de usuario 1
+
+- [X] T075 [US1] Añadir el botón “Cancelar” exclusivo de edición y propagar su acción mediante una devolución de llamada en `frontend/src/components/ProductForm.tsx`
+- [X] T076 [US1] Desseleccionar el producto en edición al cancelar para mostrar el formulario de alta vacío en `frontend/src/pages/CatalogPage.tsx`
+
+### Validación de la historia de usuario 1
+
+- [X] T077 [US1] Ejecutar la prueba de cancelación de edición en `frontend/tests/catalog-page.test.tsx`
+
+**Checkpoint**: “Limpiar” conserva la edición y restaura valores guardados; “Cancelar” abandona
+la edición, muestra alta vacía y no modifica el catálogo.
+
+---
+
+## Phase 13: Polish & Cross-Cutting Validation
+
+- [X] T078 Ejecutar `npm run test:backend`, `npm run test:frontend` y `npm run build`, y registrar el estado verificado en `memory-bank/activeContext.md` y `memory-bank/progress.md`
+
+---
+
+## Dependencias y orden de ejecución: cancelación de edición
+
+- **T074 → T075 → T076 → T077 → T078**: La prueba debe fallar antes de la implementación; la
+  integración de la devolución de llamada sigue al botón y las validaciones se ejecutan al final.
+- **Oportunidades paralelas**: Ninguna; T074, T075 y T076 son dependientes y comparten el flujo
+  de edición.
